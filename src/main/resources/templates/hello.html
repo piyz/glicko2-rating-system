@@ -15,13 +15,13 @@
                 <tr>
                     <th>Id</th>
                     <th>Team</th>
-                    <th>Rating</th>
-                    <th>RD</th>
-                    <th>Volatility</th>
-                    <th>Matches</th>
+                    <th>Bo1-Rating</th>
+                    <th>Bo1-RD</th>
                     <th>Bo3-Rating</th>
                     <th>Bo3-RD</th>
+                    <th>Bo1-Volatility</th>
                     <th>Bo3-Volatility</th>
+                    <th>Bo1-Matches</th>
                     <th>Bo3-Matches</th>
                 </tr>
                 <tr th:each="user : ${list}">
@@ -29,11 +29,11 @@
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.rating}"></td>
                     <td th:text="${user.deviation}"></td>
-                    <td th:text="${user.volatility}"></td>
-                    <td th:text="${user.count}"></td>
                     <td th:text="${user.getTeamBo3().rating}"></td>
                     <td th:text="${user.getTeamBo3().deviation}"></td>
+                    <td th:text="${user.volatility}"></td>
                     <td th:text="${user.getTeamBo3().volatility}"></td>
+                    <td th:text="${user.count}"></td>
                     <td th:text="${user.getTeamBo3().count}"></td>
                 </tr>
             </table>
@@ -63,15 +63,16 @@
     <div>
         <form action="#" th:action="@{/calculateOddsByName}">
             <select name="name1">
-                <option th:each="teamBo1 : ${list}"><span th:text="${teamBo1.name}"></span></option>
+                <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
             </select>
             <select name="name2">
-                <option th:each="teamBo1 : ${list}"><span th:text="${teamBo1.name}"></span></option>
+                <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
             </select>
             <button type="submit">Go</button>
         </form>
         <span th:text="${successMessage3}"></span>
         <span th:text="${odds2}"></span>
+        <span th:text="${oddsX}"></span>
     </div>
 
 

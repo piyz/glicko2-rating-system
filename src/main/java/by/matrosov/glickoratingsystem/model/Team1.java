@@ -5,11 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "teams")
-public class TeamBo1 {
+public class Team1 {
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private TeamBo3 teamBo3;
+    private Team3 team3;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,21 +31,21 @@ public class TeamBo1 {
     @Column(name = "count")
     private int count;
 
-    public TeamBo1() {
+    public Team1() {
     }
 
-    public TeamBo1(double rating, double deviation, double volatility) {
+    public Team1(double rating, double deviation, double volatility) {
         this.rating = rating;
         this.deviation = deviation;
         this.volatility = volatility;
     }
 
-    public TeamBo3 getTeamBo3() {
-        return teamBo3;
+    public Team3 getTeamBo3() {
+        return team3;
     }
 
-    public void setTeamBo3(TeamBo3 teamBo3) {
-        this.teamBo3 = teamBo3;
+    public void setTeamBo3(Team3 team3) {
+        this.team3 = team3;
     }
 
     public long getId() {

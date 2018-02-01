@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "teams_bo3")
-public class TeamBo3 {
+public class Team3 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class TeamBo3 {
     @Column(name = "count")
     private int count;
 
-    public TeamBo3() {
+    public Team3() {
     }
 
-    public TeamBo3(double rating, double deviation, double volatility) {
+    public Team3(double rating, double deviation, double volatility) {
         this.rating = rating;
         this.deviation = deviation;
         this.volatility = volatility;
