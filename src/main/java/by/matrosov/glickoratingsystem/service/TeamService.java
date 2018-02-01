@@ -9,4 +9,5 @@ public interface TeamService {
      Team calculateRank(Team team1, Team team2, double s);
      Team getById(long id);
      void save(Team team);
+     double calculateOdds(double f, double m, double m1);
 }

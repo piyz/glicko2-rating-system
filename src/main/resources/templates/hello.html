@@ -5,16 +5,25 @@
 </head>
 <body>
     <div>
-        <form action="#" th:action="@{/calculate}">
+        <form action="#" th:action="@{/calculateRank}">
             <label for="id1">Team1</label><input id="id1" name="id1" type="number">
             <label for="id2">Team2</label><input id="id2" name="id2" type="number">
             <label for="s">S</label><input id="s" name="s" type="number">
-
             <button type="submit">Go</button>
         </form>
+        <span th:text="${successMessage1}"></span>
     </div>
 
-    <span th:text="${successMessage}"></span>
+    <div>
+        <form action="#" th:action="@{/calculateOdds}">
+            <label for="id3">Team1</label><input id="id3" name="id3" type="number">
+            <label for="id4">Team2</label><input id="id4" name="id4" type="number">
+            <button type="submit">Go</button>
+        </form>
+        <span th:text="${successMessage2}"></span>
+        <span th:text="${odds}"></span>
+    </div>
+
 
 </body>
 </html>

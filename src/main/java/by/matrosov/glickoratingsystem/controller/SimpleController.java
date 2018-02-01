@@ -15,7 +15,6 @@ public class SimpleController {
 
     @Autowired
     private TeamService teamService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView hello(){
         ModelAndView modelAndView = new ModelAndView();
@@ -23,8 +22,8 @@ public class SimpleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/calculate", method = RequestMethod.GET)
-    public ModelAndView hello(@RequestParam("id1") long id1, @RequestParam("id2") long id2, @RequestParam("s") double s){
+    @RequestMapping(value = "/calculateRank", method = RequestMethod.GET)
+    public ModelAndView calculateRank(@RequestParam("id1") long id1, @RequestParam("id2") long id2, @RequestParam("s") double s){
         ModelAndView modelAndView = new ModelAndView();
 
         Team team1 = teamService.getById(id1);
@@ -52,7 +51,24 @@ public class SimpleController {
 
         teamService.save(team1);
 
-        modelAndView.addObject("successMessage", "update done successfully");
+        modelAndView.addObject("successMessage1", "update done successfully");
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/calculateOdds", method = RequestMethod.GET)
+    public ModelAndView calculateOdd(@RequestParam("id3") long id3, @RequestParam("id4") long id4){
+        ModelAndView modelAndView = new ModelAndView();
+
+        Team team1 = teamService.getById(id3);
+        Team team2 = teamService.getById(id4);
+
+
+        double odds = teamService.calculateOdds(team2.getDeviation()/173.7178, (team1.getRating()-1500)/173.7178, (team2.getRating()-1500)/173.7178);
+
+
+        modelAndView.addObject("odds", odds);
+        modelAndView.addObject("successMessage2", "odds calculate successfully");
         modelAndView.setViewName("hello");
         return modelAndView;
     }

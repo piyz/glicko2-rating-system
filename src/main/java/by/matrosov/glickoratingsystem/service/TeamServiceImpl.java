@@ -126,4 +126,10 @@ public class TeamServiceImpl implements TeamService {
     public void save(Team team) {
         teamDao.save(team);
     }
+
+    @Override
+    public double calculateOdds(double f, double m, double m1) {
+        double g = 1/Math.sqrt(1 + 3*Math.pow(f, 2)/Math.pow(Math.PI, 2));
+        return 1/(1 + Math.exp(-g*(m - m1)));
+    }
 }
