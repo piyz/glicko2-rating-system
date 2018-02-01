@@ -132,4 +132,9 @@ public class TeamServiceImpl implements TeamService {
         double g = 1/Math.sqrt(1 + 3*Math.pow(f, 2)/Math.pow(Math.PI, 2));
         return 1/(1 + Math.exp(-g*(m - m1)));
     }
+
+    @Override
+    public Team getByName(String s) {
+        return teamDao.getByName(s);
+    }
 }

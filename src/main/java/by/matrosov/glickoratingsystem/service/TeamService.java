@@ -10,4 +10,5 @@ public interface TeamService {
      Team getById(long id);
      void save(Team team);
      double calculateOdds(double f, double m, double m1);
+     Team getByName(String s);
 }

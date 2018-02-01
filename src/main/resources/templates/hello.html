@@ -15,13 +15,27 @@
     </div>
 
     <div>
-        <form action="#" th:action="@{/calculateOdds}">
+        <form action="#" th:action="@{/calculateOddsById}">
             <label for="id3">Team1</label><input id="id3" name="id3" type="number">
             <label for="id4">Team2</label><input id="id4" name="id4" type="number">
             <button type="submit">Go</button>
         </form>
         <span th:text="${successMessage2}"></span>
-        <span th:text="${odds}"></span>
+        <span th:text="${odds1}"></span>
+    </div>
+
+    <div>
+        <form action="#" th:action="@{/calculateOddsByName}">
+            <select name="name1">
+                <option th:each="team : ${list}"><span th:text="${team.name}"></span></option>
+            </select>
+            <select name="name2">
+                <option th:each="team : ${list}"><span th:text="${team.name}"></span></option>
+            </select>
+            <button type="submit">Go</button>
+        </form>
+        <span th:text="${successMessage3}"></span>
+        <span th:text="${odds2}"></span>
     </div>
 
 

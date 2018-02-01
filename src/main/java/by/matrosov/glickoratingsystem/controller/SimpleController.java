@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 public class SimpleController {
 
     @Autowired
     private TeamService teamService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView hello(){
         ModelAndView modelAndView = new ModelAndView();
+        List<Team> list = teamService.getAll();
+        modelAndView.addObject("list", list);
         modelAndView.setViewName("hello");
         return modelAndView;
     }
@@ -56,19 +61,34 @@ public class SimpleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/calculateOdds", method = RequestMethod.GET)
-    public ModelAndView calculateOdd(@RequestParam("id3") long id3, @RequestParam("id4") long id4){
+    @RequestMapping(value = "/calculateOddsById", method = RequestMethod.GET)
+    public ModelAndView calculateOdds1(@RequestParam("id3") long id3, @RequestParam("id4") long id4){
         ModelAndView modelAndView = new ModelAndView();
 
         Team team1 = teamService.getById(id3);
         Team team2 = teamService.getById(id4);
 
 
-        double odds = teamService.calculateOdds(team2.getDeviation()/173.7178, (team1.getRating()-1500)/173.7178, (team2.getRating()-1500)/173.7178);
+        double odds = 100*teamService.calculateOdds(team2.getDeviation()/173.7178, (team1.getRating()-1500)/173.7178, (team2.getRating()-1500)/173.7178);
+        //odds = Double.parseDouble(new DecimalFormat("##.##").format(odds));
 
+        modelAndView.addObject("odds1", String.format("%.2f", odds));
+        modelAndView.addObject("successMessage2", "odds calculated successfully");
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
 
-        modelAndView.addObject("odds", odds);
-        modelAndView.addObject("successMessage2", "odds calculate successfully");
+    @RequestMapping(value = "/calculateOddsByName", method = RequestMethod.GET)
+    public ModelAndView calculateOdds2(@RequestParam("name1") String name1, @RequestParam("name2") String name2){
+        ModelAndView modelAndView = new ModelAndView();
+
+        Team team1 = teamService.getByName(name1);
+        Team team2 = teamService.getByName(name2);
+
+        double odds = 100*teamService.calculateOdds(team2.getDeviation()/173.7178, (team1.getRating()-1500)/173.7178, (team2.getRating()-1500)/173.7178);
+
+        modelAndView.addObject("odds2", String.format("%.2f", odds));
+        modelAndView.addObject("successMessage3", "odds calculated successfully");
         modelAndView.setViewName("hello");
         return modelAndView;
     }
