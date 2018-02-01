@@ -125,9 +125,8 @@ public class SimpleController {
         double odds = 100*teamService.calculateOdds(team12.getDeviation()/173.7178, (team11.getRating()-1500)/173.7178, (team12.getRating()-1500)/173.7178);
         double oddsX = 100*teamService.calculateOdds(team12.getTeamBo3().getDeviation()/173.7178, (team11.getTeamBo3().getRating()-1500)/173.7178, (team12.getTeamBo3().getRating()-1500)/173.7178);
 
-        modelAndView.addObject("odds2", String.format("%.2f", odds));
-        modelAndView.addObject("oddsX", String.format("%.2f", oddsX));
-        modelAndView.addObject("successMessage3", "odds calculated successfully");
+        modelAndView.addObject("odds2", "Odds for Bo1 matches " + String.format("%.2f", odds));
+        modelAndView.addObject("oddsX", "Odds for Bo3 matches " +String.format("%.2f", oddsX));
         modelAndView.setViewName("hello");
         return modelAndView;
     }
