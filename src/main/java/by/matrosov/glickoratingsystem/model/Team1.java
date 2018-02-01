@@ -4,7 +4,7 @@ package by.matrosov.glickoratingsystem.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "teams_bo1")
 public class Team1 {
 
     @OneToOne(cascade = CascadeType.ALL)

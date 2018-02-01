@@ -40,41 +40,58 @@
         </div>
     </div>
 
-    <div>
-        <form action="#" th:action="@{/calculateRank}">
-            <label for="id1">Team1</label><input id="id1" name="id1" type="number">
-            <label for="id2">Team2</label><input id="id2" name="id2" type="number">
-            <label for="s">S</label><input id="s" name="s" type="number">
-            <button type="submit">Go</button>
-        </form>
-        <span th:text="${successMessage1}"></span>
-    </div>
+    <div class="container">
+        <h2>Update bo1</h2>
+        <div>
+            <form action="#" th:action="@{/calculateRank1}">
+                <label for="id1">Team1</label><input id="id1" name="id1" type="number">
+                <label for="id2">Team2</label><input id="id2" name="id2" type="number">
+                <label for="s1">S</label><input id="s1" name="s1" type="number">
+                <button type="submit">Go</button>
+            </form>
+            <span th:text="${success1}"></span>
+        </div>
 
-    <div>
-        <form action="#" th:action="@{/calculateOddsById}">
-            <label for="id3">Team1</label><input id="id3" name="id3" type="number">
-            <label for="id4">Team2</label><input id="id4" name="id4" type="number">
-            <button type="submit">Go</button>
-        </form>
-        <span th:text="${successMessage2}"></span>
-        <span th:text="${odds1}"></span>
-    </div>
-
-    <div>
-        <form action="#" th:action="@{/calculateOddsByName}">
-            <select name="name1">
-                <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
-            </select>
-            <select name="name2">
-                <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
-            </select>
-            <button type="submit">Go</button>
-        </form>
-        <span th:text="${successMessage3}"></span>
-        <span th:text="${odds2}"></span>
-        <span th:text="${oddsX}"></span>
+        <h2>Update bo3</h2>
+        <div>
+            <form action="#" th:action="@{/calculateRank3}">
+                <label for="id5">Team1</label><input id="id5" name="id5" type="number">
+                <label for="id6">Team2</label><input id="id6" name="id6" type="number">
+                <label for="s2">S</label><input id="s2" name="s2" type="number">
+                <button type="submit">Go</button>
+            </form>
+            <span th:text="${success2}"></span>
+        </div>
     </div>
 
 
+    <div class="container">
+        <h2>Calculate odds by id</h2>
+        <div>
+            <form action="#" th:action="@{/calculateOddsById}">
+                <label for="id3">Team1</label><input id="id3" name="id3" type="number">
+                <label for="id4">Team2</label><input id="id4" name="id4" type="number">
+                <button type="submit">Go</button>
+            </form>
+            <span th:text="${successMessage2}"></span>
+            <span th:text="${odds1}"></span>
+        </div>
+
+        <h2>Calculate odds by name</h2>
+        <div>
+            <form action="#" th:action="@{/calculateOddsByName}">
+                <select name="name1">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <select name="name2">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <button type="submit">Go</button>
+            </form>
+            <span th:text="${successMessage3}"></span>
+            <span th:text="${odds2}"></span>
+            <span th:text="${oddsX}"></span>
+        </div>
+    </div>
 </body>
 </html>

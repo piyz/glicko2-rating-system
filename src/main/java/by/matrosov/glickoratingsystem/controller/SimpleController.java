@@ -1,6 +1,7 @@
 package by.matrosov.glickoratingsystem.controller;
 
 import by.matrosov.glickoratingsystem.model.Team1;
+import by.matrosov.glickoratingsystem.model.Team3;
 import by.matrosov.glickoratingsystem.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,12 @@ public class SimpleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/calculateRank", method = RequestMethod.GET)
-    public ModelAndView calculateRank(@RequestParam("id1") long id1, @RequestParam("id2") long id2, @RequestParam("s") double s){
+    @RequestMapping(value = "/calculateRank1", method = RequestMethod.GET)
+    public ModelAndView calculateRank(@RequestParam("id1") long id1, @RequestParam("id2") long id2, @RequestParam("s1") double s){
         ModelAndView modelAndView = new ModelAndView();
 
-        Team1 team11 = teamService.getById(id1);
-        Team1 team12 = teamService.getById(id2);
+        Team1 team1 = teamService.getById1(id1);
+        Team1 team2 = teamService.getById1(id2);
 
         double s1;
         if (s == 1){
@@ -41,22 +42,58 @@ public class SimpleController {
             s1 = 1;
         }
 
-        Team1 team1New1 = teamService.calculateRank(team11, team12, s);
-        Team1 team1New2 = teamService.calculateRank(team12, team11, s1);
+        Team1 team1new = teamService.calculateRank1(team1, team2, s);
+        Team1 team2new = teamService.calculateRank1(team2, team1, s1);
 
-        team11.setRating(team1New1.getRating());
-        team11.setDeviation(team1New1.getDeviation());
-        team11.setVolatility(team1New1.getVolatility());
-        team12.setRating(team1New2.getRating());
-        team12.setDeviation(team1New2.getDeviation());
-        team12.setVolatility(team1New2.getVolatility());
+        team1.setRating(team1new.getRating());
+        team1.setDeviation(team1new.getDeviation());
+        team1.setVolatility(team1new.getVolatility());
+        team2.setRating(team2new.getRating());
+        team2.setDeviation(team2new.getDeviation());
+        team2.setVolatility(team2new.getVolatility());
 
-        team11.setCount(team11.getCount() + 1);
-        team12.setCount(team12.getCount() + 1);
+        team1.setCount(team1.getCount() + 1);
+        team2.setCount(team2.getCount() + 1);
 
-        teamService.save(team11);
+        teamService.save1(team1);
+        teamService.save1(team2);
 
-        modelAndView.addObject("successMessage1", "update done successfully");
+        modelAndView.addObject("success1", "update done successfully");
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/calculateRank3", method = RequestMethod.GET)
+    public ModelAndView calculateRank3(@RequestParam("id5") long id5, @RequestParam("id6") long id6, @RequestParam("s2") double s){
+        ModelAndView modelAndView = new ModelAndView();
+
+        Team3 team1 = teamService.getById3(id5);
+        Team3 team2 = teamService.getById3(id6);
+
+        double s1;
+        if (s == 1){
+            s1 = 0;
+        }else{
+            s1 = 1;
+        }
+
+        Team3 team1new = teamService.calculateRank3(team1, team2, s);
+        Team3 team2new = teamService.calculateRank3(team2, team1, s1);
+
+        team1.setRating(team1new.getRating());
+        team1.setDeviation(team1new.getDeviation());
+        team1.setVolatility(team1new.getVolatility());
+        team2.setRating(team2new.getRating());
+        team2.setDeviation(team2new.getDeviation());
+        team2.setVolatility(team2new.getVolatility());
+
+        team1.setCount(team1.getCount() + 1);
+        team2.setCount(team2.getCount() + 1);
+
+        teamService.save2(team1);
+        teamService.save2(team2);
+
+        modelAndView.addObject("success2", "update done successfully");
         modelAndView.setViewName("hello");
         return modelAndView;
     }
@@ -65,8 +102,8 @@ public class SimpleController {
     public ModelAndView calculateOdds1(@RequestParam("id3") long id3, @RequestParam("id4") long id4){
         ModelAndView modelAndView = new ModelAndView();
 
-        Team1 team11 = teamService.getById(id3);
-        Team1 team12 = teamService.getById(id4);
+        Team1 team11 = teamService.getById1(id3);
+        Team1 team12 = teamService.getById1(id4);
 
 
         double odds = 100*teamService.calculateOdds(team12.getDeviation()/173.7178, (team11.getRating()-1500)/173.7178, (team12.getRating()-1500)/173.7178);
