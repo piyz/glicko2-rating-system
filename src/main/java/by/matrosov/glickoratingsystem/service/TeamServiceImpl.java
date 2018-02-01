@@ -1,7 +1,7 @@
 package by.matrosov.glickoratingsystem.service;
 
 import by.matrosov.glickoratingsystem.dao.TeamDao;
-import by.matrosov.glickoratingsystem.model.Team;
+import by.matrosov.glickoratingsystem.model.TeamBo1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class TeamServiceImpl implements TeamService {
     private TeamDao teamDao;
 
     @Override
-    public List<Team> getAll() {
+    public List<TeamBo1> getAll() {
         return teamDao.findAll();
     }
 
@@ -24,20 +24,20 @@ public class TeamServiceImpl implements TeamService {
 
     /**
      * <p></p>
-     * @param team1
-     * @param team2
+     * @param teamBo11
+     * @param teamBo12
      * @param s
      * @return
      */
     @Override
-    public Team calculateRank(Team team1, Team team2, double s) {
+    public TeamBo1 calculateRank(TeamBo1 teamBo11, TeamBo1 teamBo12, double s) {
         double tay = 0.2; //const
 
-        double rate1 = team1.getRating();
-        double rd1 = team1.getDeviation();
-        double volatility = team1.getVolatility();
-        double rate2 = team2.getRating();
-        double rd2 = team2.getDeviation();
+        double rate1 = teamBo11.getRating();
+        double rd1 = teamBo11.getDeviation();
+        double volatility = teamBo11.getVolatility();
+        double rate2 = teamBo12.getRating();
+        double rd2 = teamBo12.getDeviation();
 
         //step 2
 
@@ -114,17 +114,17 @@ public class TeamServiceImpl implements TeamService {
         double rateNew = 173.7178 * muNew + 1500;
         double rdNew = 173.7178 * fNew;
 
-        return new Team(rateNew, rdNew, volatilityNew);
+        return new TeamBo1(rateNew, rdNew, volatilityNew);
     }
 
     @Override
-    public Team getById(long id) {
+    public TeamBo1 getById(long id) {
         return teamDao.getOne(id);
     }
 
     @Override
-    public void save(Team team) {
-        teamDao.save(team);
+    public void save(TeamBo1 teamBo1) {
+        teamDao.save(teamBo1);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team getByName(String s) {
+    public TeamBo1 getByName(String s) {
         return teamDao.getByName(s);
     }
 }

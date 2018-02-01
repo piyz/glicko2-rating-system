@@ -1,10 +1,8 @@
 package by.matrosov.glickoratingsystem.dao;
 
-import by.matrosov.glickoratingsystem.model.Team;
+import by.matrosov.glickoratingsystem.model.TeamBo1;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface TeamDao extends JpaRepository<Team,Long>{
-    Team getByName(String s);
+public interface TeamDao extends JpaRepository<TeamBo1,Long>{
+    TeamBo1 getByName(String s);
 }

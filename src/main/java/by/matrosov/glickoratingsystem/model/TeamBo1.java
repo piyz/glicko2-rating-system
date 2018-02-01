@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "teams")
-public class Team {
+public class TeamBo1 {
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -31,10 +31,10 @@ public class Team {
     @Column(name = "count")
     private int count;
 
-    public Team() {
+    public TeamBo1() {
     }
 
-    public Team(double rating, double deviation, double volatility) {
+    public TeamBo1(double rating, double deviation, double volatility) {
         this.rating = rating;
         this.deviation = deviation;
         this.volatility = volatility;

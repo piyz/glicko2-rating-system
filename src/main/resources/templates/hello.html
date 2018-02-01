@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <title>Home Page</title>
 </head>
 <body>
-    <div>
+    <div class="container">
         <div th:if="${not #lists.isEmpty(list)}">
             <h2>Teams</h2>
             <table class="table table-striped">
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Volatility</th>
-                    <th>Dev</th>
+                    <th>Team</th>
                     <th>Rating</th>
-                    <th>Bo3Rating</th>
-                    <th>Bo3Dev</th>
-                    <th>Bo3volatility</th>
+                    <th>RD</th>
+                    <th>Volatility</th>
+                    <th>Matches</th>
+                    <th>Bo3-Rating</th>
+                    <th>Bo3-RD</th>
+                    <th>Bo3-Volatility</th>
+                    <th>Bo3-Matches</th>
                 </tr>
                 <tr th:each="user : ${list}">
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.name}"></td>
-                    <td th:text="${user.volatility}"></td>
-                    <td th:text="${user.deviation}"></td>
                     <td th:text="${user.rating}"></td>
+                    <td th:text="${user.deviation}"></td>
+                    <td th:text="${user.volatility}"></td>
+                    <td th:text="${user.count}"></td>
                     <td th:text="${user.getTeamBo3().rating}"></td>
                     <td th:text="${user.getTeamBo3().deviation}"></td>
                     <td th:text="${user.getTeamBo3().volatility}"></td>
+                    <td th:text="${user.getTeamBo3().count}"></td>
                 </tr>
             </table>
         </div>
@@ -55,10 +63,10 @@
     <div>
         <form action="#" th:action="@{/calculateOddsByName}">
             <select name="name1">
-                <option th:each="team : ${list}"><span th:text="${team.name}"></span></option>
+                <option th:each="teamBo1 : ${list}"><span th:text="${teamBo1.name}"></span></option>
             </select>
             <select name="name2">
-                <option th:each="team : ${list}"><span th:text="${team.name}"></span></option>
+                <option th:each="teamBo1 : ${list}"><span th:text="${teamBo1.name}"></span></option>
             </select>
             <button type="submit">Go</button>
         </form>
