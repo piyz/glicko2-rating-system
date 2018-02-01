@@ -5,6 +5,34 @@
 </head>
 <body>
     <div>
+        <div th:if="${not #lists.isEmpty(list)}">
+            <h2>Teams</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Volatility</th>
+                    <th>Dev</th>
+                    <th>Rating</th>
+                    <th>Bo3Rating</th>
+                    <th>Bo3Dev</th>
+                    <th>Bo3volatility</th>
+                </tr>
+                <tr th:each="user : ${list}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.volatility}"></td>
+                    <td th:text="${user.deviation}"></td>
+                    <td th:text="${user.rating}"></td>
+                    <td th:text="${user.getTeamBo3().rating}"></td>
+                    <td th:text="${user.getTeamBo3().deviation}"></td>
+                    <td th:text="${user.getTeamBo3().volatility}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div>
         <form action="#" th:action="@{/calculateRank}">
             <label for="id1">Team1</label><input id="id1" name="id1" type="number">
             <label for="id2">Team2</label><input id="id2" name="id2" type="number">

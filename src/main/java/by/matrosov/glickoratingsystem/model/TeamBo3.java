@@ -1,23 +1,15 @@
 package by.matrosov.glickoratingsystem.model;
 
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "teams")
-public class Team {
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private TeamBo3 teamBo3;
+@Table(name = "teams_bo3")
+public class TeamBo3 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
-    @Column(name = "name")
-    private String name;
 
     @Column(name = "rating")
     private double rating;
@@ -31,21 +23,13 @@ public class Team {
     @Column(name = "count")
     private int count;
 
-    public Team() {
+    public TeamBo3() {
     }
 
-    public Team(double rating, double deviation, double volatility) {
+    public TeamBo3(double rating, double deviation, double volatility) {
         this.rating = rating;
         this.deviation = deviation;
         this.volatility = volatility;
-    }
-
-    public TeamBo3 getTeamBo3() {
-        return teamBo3;
-    }
-
-    public void setTeamBo3(TeamBo3 teamBo3) {
-        this.teamBo3 = teamBo3;
     }
 
     public long getId() {
@@ -54,14 +38,6 @@ public class Team {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getRating() {
