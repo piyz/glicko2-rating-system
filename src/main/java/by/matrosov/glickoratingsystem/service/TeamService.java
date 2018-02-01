@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TeamService {
      List<Team> getAll();
-     Team calculateRank(Team team1, Team team2, int s);
+     Team calculateRank(Team team1, Team team2, double s);
      Team getById(long id);
      void save(Team team);
 }

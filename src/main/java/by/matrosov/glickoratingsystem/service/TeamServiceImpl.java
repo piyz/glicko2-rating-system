@@ -30,7 +30,7 @@ public class TeamServiceImpl implements TeamService {
      * @return
      */
     @Override
-    public Team calculateRank(Team team1, Team team2, int s) {
+    public Team calculateRank(Team team1, Team team2, double s) {
         double tay = 0.2; //const
 
         double rate1 = team1.getRating();

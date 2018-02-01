@@ -24,6 +24,9 @@ public class Team {
     @Column(name = "volatility")
     private double volatility;
 
+    @Column(name = "count")
+    private int count;
+
     public Team() {
     }
 
@@ -73,14 +76,11 @@ public class Team {
         this.volatility = volatility;
     }
 
-    @Override
-    public String toString() {
-        return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", rating=" + rating +
-                ", deviation=" + deviation +
-                ", volatility=" + volatility +
-                '}';
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

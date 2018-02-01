@@ -1,9 +1,10 @@
 CREATE TABLE teams(
   id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
-  rating VARCHAR(255) NOT NULL ,
-  deviation VARCHAR(255) NOT NULL ,
-  volatility VARCHAR(255) NOT NULL
+  rating DOUBLE(7,3) NOT NULL ,
+  deviation DOUBLE(6,3) NOT NULL ,
+  volatility DOUBLE(8,6) NOT NULL,
+  count INT(11) NOT NULL
 );
 
 
