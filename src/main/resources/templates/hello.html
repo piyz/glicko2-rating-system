@@ -41,6 +41,7 @@
         </div>
     </div>
 
+    <!--
     <div class="container">
         <h2>Update bo1</h2>
         <div>
@@ -64,9 +65,11 @@
             <span th:text="${success2}"></span>
         </div>
     </div>
+    //-->
 
 
     <div class="container">
+        <!--
         <h2>Calculate odds by id</h2>
         <div>
             <form action="#" th:action="@{/calculateOddsById}">
@@ -77,6 +80,7 @@
             <span th:text="${successMessage2}"></span>
             <span th:text="${odds1}"></span>
         </div>
+        //-->
 
         <h2>Calculate odds by name</h2>
         <div>
@@ -93,6 +97,17 @@
             <br>
             <span th:text="${oddsX}"></span>
         </div>
+    </div>
+
+    <div class="container">
+        <form th:action="@{/}" method="get">
+            <button type="submit">Back</button>
+        </form>
+    </div>
+    <div class="container">
+        <form th:action="@{/update}" method="get">
+            <button type="submit">Go to update</button>
+        </form>
     </div>
 </body>
 </html>

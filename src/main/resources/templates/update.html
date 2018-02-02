@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <title>Update Page</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Update bo1</h2>
+        <div>
+            <form action="#" th:action="@{/calculateRank11}">
+                <select name="name3">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <select name="name4">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <label for="s3">S</label><input id="s3" name="s3" type="number">
+                <button type="submit">Go</button>
+            </form>
+        </div>
+
+        <h2>Update bo3</h2>
+        <div>
+            <form action="#" th:action="@{/calculateRank33}">
+                <select name="name5">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <select name="name6">
+                    <option th:each="team1 : ${list}"><span th:text="${team1.name}"></span></option>
+                </select>
+                <label for="s4">S</label><input id="s4" name="s4" type="number">
+                <button type="submit">Go</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <form th:action="@{/}" method="get">
+            <button type="submit">Back</button>
+        </form>
+    </div>
+</body>
+</html>

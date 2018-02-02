@@ -28,6 +28,15 @@ public class SimpleController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public ModelAndView update(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Team1> list = teamService.getAll();
+        modelAndView.addObject("list", list);
+        modelAndView.setViewName("update");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/calculateRank1", method = RequestMethod.GET)
     public ModelAndView calculateRank(@RequestParam("id1") long id1, @RequestParam("id2") long id2, @RequestParam("s1") double s){
         ModelAndView modelAndView = new ModelAndView();
@@ -126,7 +135,78 @@ public class SimpleController {
         double oddsX = 100*teamService.calculateOdds(team12.getTeamBo3().getDeviation()/173.7178, (team11.getTeamBo3().getRating()-1500)/173.7178, (team12.getTeamBo3().getRating()-1500)/173.7178);
 
         modelAndView.addObject("odds2", "Odds for Bo1 matches " + String.format("%.2f", odds));
-        modelAndView.addObject("oddsX", "Odds for Bo3 matches " +String.format("%.2f", oddsX));
+        modelAndView.addObject("oddsX", "Odds for Bo3 matches " +String.format("%.2f", oddsX) + "\n");
+        modelAndView.addObject("successMessage3", "odds calculated successfully");
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/calculateRank11", method = RequestMethod.GET)
+    public ModelAndView calculateRank11(@RequestParam("name3") String name3, @RequestParam("name4") String name4, @RequestParam("s3") double s){
+        ModelAndView modelAndView = new ModelAndView();
+
+        Team1 team1 = teamService.getByName(name3);
+        Team1 team2 = teamService.getByName(name4);
+
+        double s1;
+        if (s == 1){
+            s1 = 0;
+        }else{
+            s1 = 1;
+        }
+
+        Team1 team1new = teamService.calculateRank1(team1, team2, s);
+        Team1 team2new = teamService.calculateRank1(team2, team1, s1);
+
+        team1.setRating(team1new.getRating());
+        team1.setDeviation(team1new.getDeviation());
+        team1.setVolatility(team1new.getVolatility());
+        team2.setRating(team2new.getRating());
+        team2.setDeviation(team2new.getDeviation());
+        team2.setVolatility(team2new.getVolatility());
+
+        team1.setCount(team1.getCount() + 1);
+        team2.setCount(team2.getCount() + 1);
+
+        teamService.save1(team1);
+        teamService.save1(team2);
+
+        modelAndView.addObject("success1", "update done successfully");
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/calculateRank33", method = RequestMethod.GET)
+    public ModelAndView calculateRank33(@RequestParam("name5") String name3, @RequestParam("name6") String name4, @RequestParam("s4") double s){
+        ModelAndView modelAndView = new ModelAndView();
+
+        Team3 team1 = teamService.getByName(name3).getTeamBo3();
+        Team3 team2 = teamService.getByName(name4).getTeamBo3();
+
+        double s1;
+        if (s == 1){
+            s1 = 0;
+        }else{
+            s1 = 1;
+        }
+
+        Team3 team1new = teamService.calculateRank3(team1, team2, s);
+        Team3 team2new = teamService.calculateRank3(team2, team1, s1);
+
+        team1.setRating(team1new.getRating());
+        team1.setDeviation(team1new.getDeviation());
+        team1.setVolatility(team1new.getVolatility());
+        team2.setRating(team2new.getRating());
+        team2.setDeviation(team2new.getDeviation());
+        team2.setVolatility(team2new.getVolatility());
+
+        team1.setCount(team1.getCount() + 1);
+        team2.setCount(team2.getCount() + 1);
+
+        teamService.save2(team1);
+        teamService.save2(team2);
+
+        modelAndView.addObject("success1", "update done successfully");
         modelAndView.setViewName("hello");
         return modelAndView;
     }
