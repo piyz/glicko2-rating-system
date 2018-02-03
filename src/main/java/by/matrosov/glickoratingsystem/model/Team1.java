@@ -95,4 +95,17 @@ public class Team1 {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "Team1{" +
+                "team3=" + team3 +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", rating=" + rating +
+                ", deviation=" + deviation +
+                ", volatility=" + volatility +
+                ", count=" + count +
+                '}';
+    }
 }

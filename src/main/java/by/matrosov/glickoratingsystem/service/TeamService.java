@@ -15,4 +15,6 @@ public interface TeamService {
      void save2(Team3 team3);
      double calculateOdds(double f, double m, double m1);
      Team1 getByName(String s);
+
+     Team1 calculateRankNew(List<Team1> list, List<Double> s);
 }

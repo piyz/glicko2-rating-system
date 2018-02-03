@@ -240,4 +240,104 @@ public class TeamServiceImpl implements TeamService {
     public Team1 getByName(String s) {
         return team1Dao.getByName(s);
     }
+
+    @Override
+    public Team1 calculateRankNew(List<Team1> teams, List<Double> s) {
+        double tay = 0.5;
+
+        //step 2
+
+        for (Team1 team : teams) {
+            team.setRating((team.getRating() - 1500) / 173.7178); //m
+            team.setDeviation(team.getDeviation() / 173.7178); //f
+        }
+
+        //step 3
+
+        double m = teams.get(0).getRating();
+        double f = teams.get(0).getDeviation();
+        double sigma = teams.get(0).getVolatility();
+        double v = 0;
+        for (int i = 1; i < teams.size(); i++) {
+            v = v + g(Math.pow(teams.get(i).getDeviation(), 2)) * E(m, teams.get(i).getRating(), teams.get(i).getDeviation())
+                    * (1 - E(m, teams.get(i).getRating(), teams.get(i).getDeviation()));
+        }
+        v = Math.pow(v, -1);
+
+        //step 4
+
+        double x = 0;
+        for (int i = 1; i < teams.size(); i++) {
+            x = x + g(teams.get(i).getDeviation()) * (s.get(i) - E(m, teams.get(i).getRating(), teams.get(i).getDeviation()));
+        }
+        double delta = v * x;
+
+        //step 5.1
+
+        double a = Math.log(Math.pow(sigma, 2));
+        double epsilon = 0.000001;
+
+        //step 5.2
+
+        double b;
+        if (Math.pow(delta, 2) > Math.pow(f, 2) + v){
+            b = Math.log(Math.pow(delta, 2) - Math.pow(f, 2) - v);
+        }else {
+            int k = 1;
+            while (function(a-k*tay,delta,f,v,a,tay) < 0){
+                k++;
+            }
+            b = a - k*tay;
+        }
+
+        //step 5.3
+
+        double fa = function(a,delta,f,v,a,tay);
+        double fb = function(b,delta,f,v,a,tay);
+
+        //step 5.4
+
+        while (Math.abs(b-a) > epsilon){
+            double c = a + (a - b) * fa / (fb - fa);
+            double fc = function(c,delta,f,v,a,tay);
+            if (fc * fb < 0){
+                a = b;
+                fa = fb;
+            }else {
+                fa = fa / 2;
+            }
+            b = c;
+            fb = fc;
+        }
+
+        //step 5.5
+
+        double sigmaNew = Math.exp(a / 2);
+
+        //step 6
+
+        double fPre = Math.sqrt(Math.pow(f, 2) + Math.pow(sigmaNew, 2));
+
+
+        //step 7
+
+        double fNew = 1 / Math.sqrt(1 / Math.pow(fPre, 2) + 1 / v);
+        double mNew = m + Math.pow(fNew, 2) * x;
+
+        //step 8
+
+        teams.get(0).setRating(173.7178 * mNew + 1500);
+        teams.get(0).setDeviation(173.7178 * fNew);
+        teams.get(0).setVolatility(sigmaNew);
+
+        return teams.get(0);
+    }
+
+    private static double g(double f){
+        return 1 / Math.sqrt(1 + 3 * Math.pow(f, 2) / Math.pow(Math.PI, 2));
+    }
+
+    private static double E(double m0, double m1, double f1){
+        return 1 / (1 + Math.exp(-g(f1) * (m0 - m1)));
+    }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -208,6 +210,29 @@ public class SimpleController {
 
         modelAndView.addObject("success1", "update done successfully");
         modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/calculateRankNew", method = RequestMethod.GET)
+    public ModelAndView calculateRankNew(@RequestParam("names") String names, @RequestParam("S") String listS){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Team1> listTeams = new ArrayList<>();
+        List<Double> doubleList = new ArrayList<>();
+
+        String[] array = names.split(",");
+        for (String s : array) {
+            listTeams.add(teamService.getByName(s));
+        }
+        String[] array1 = listS.split(",");
+        for (String s : array1) {
+            doubleList.add(Double.parseDouble(s));
+        }
+
+        Team1 teamNew = teamService.calculateRankNew(listTeams, doubleList);
+
+        modelAndView.addObject("newTeam", teamNew);
+        modelAndView.addObject("success", "DONE");
+        modelAndView.setViewName("update");
         return modelAndView;
     }
 }
