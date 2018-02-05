@@ -157,8 +157,24 @@ public class SimpleController {
             s1 = 1;
         }
 
-        Team1 team1new = teamService.calculateRank1(team1, team2, s);
-        Team1 team2new = teamService.calculateRank1(team2, team1, s1);
+        List<Team1> list1 = new ArrayList<>();
+        List<Double> sList1 = new ArrayList<>();
+        sList1.add(-1d);
+        sList1.add(s);
+        list1.add(team1);
+        list1.add(team2);
+
+        List<Team1> list2 = new ArrayList<>();
+        List<Double> sList2 = new ArrayList<>();
+        sList2.add(-1d);
+        sList2.add(s1);
+        list2.add(team2);
+        list2.add(team1);
+        Team1 team1new = teamService.calculateRankNew(list1, sList1);
+        Team1 team2new = teamService.calculateRankNew(list2, sList2);
+
+        //Team1 team1new = teamService.calculateRank1(team1, team2, s);
+        //Team1 team2new = teamService.calculateRank1(team2, team1, s1);
 
         team1.setRating(team1new.getRating());
         team1.setDeviation(team1new.getDeviation());
@@ -192,8 +208,25 @@ public class SimpleController {
             s1 = 1;
         }
 
-        Team3 team1new = teamService.calculateRank3(team1, team2, s);
-        Team3 team2new = teamService.calculateRank3(team2, team1, s1);
+        List<Team3> list1 = new ArrayList<>();
+        List<Double> sList1 = new ArrayList<>();
+        sList1.add(-1d);
+        sList1.add(s);
+        list1.add(team1);
+        list1.add(team2);
+
+        List<Team3> list2 = new ArrayList<>();
+        List<Double> sList2 = new ArrayList<>();
+        sList2.add(-1d);
+        sList2.add(s1);
+        list2.add(team2);
+        list2.add(team1);
+
+        Team3 team1new = teamService.calculateRankNew3(list1, sList1);
+        Team3 team2new = teamService.calculateRankNew3(list2, sList2);
+
+        //Team3 team1new = teamService.calculateRank3(team1, team2, s);
+        //Team3 team2new = teamService.calculateRank3(team2, team1, s1);
 
         team1.setRating(team1new.getRating());
         team1.setDeviation(team1new.getDeviation());

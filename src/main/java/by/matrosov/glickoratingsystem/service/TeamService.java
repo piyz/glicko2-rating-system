@@ -17,4 +17,5 @@ public interface TeamService {
      Team1 getByName(String s);
 
      Team1 calculateRankNew(List<Team1> list, List<Double> s);
+     Team3 calculateRankNew3(List<Team3> list, List<Double> s);
 }
